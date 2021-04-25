@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="@string/tap_anywhere_to_open_a_photo"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:id="@+id/open_img_tv"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_height="56dp"
+            android:layout_width="56dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_baseline_camera_24"
+            android:id="@+id/fabCamera"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
