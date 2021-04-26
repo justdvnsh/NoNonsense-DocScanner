@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">NoNonsense_DocScanner</string>
     <string name="permission_read_and_write_external_storage">This app requires permissions to read and write external storage.</string>
+    <string name="permission_camera">This app requires permissions to use the camera.</string>
     <string name="open">OPEN</string>
     <string name="tap_anywhere_to_open_a_photo">Tap Anywhere to Open a Photo</string>
 </resources>

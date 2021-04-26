@@ -1,8 +1,7 @@
 package divyansh.tech.nononsense_docscanner.home
 
 import android.Manifest
-import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.Manifest.permission.*
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +16,7 @@ import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import dagger.hilt.android.AndroidEntryPoint
 import divyansh.tech.nononsense_docscanner.R
 import divyansh.tech.nononsense_docscanner.home.fragments.HomeFragment
+import divyansh.tech.nononsense_docscanner.utils.C.REQUEST_CODE_CAMERA_PERM
 import divyansh.tech.nononsense_docscanner.utils.C.REQUEST_CODE_READ_AND_WRITE_EXTERNAL_STORAGE
 import divyansh.tech.nononsense_docscanner.utils.C.SELECT_IMAGE_CODE
 import divyansh.tech.nononsense_docscanner.utils.FileUtils.openFileChooser
@@ -42,12 +42,6 @@ class MainActivity : AppCompatActivity() {
         REQUEST_CODE_READ_AND_WRITE_EXTERNAL_STORAGE
     )
     private fun setupFragment() {
-        // Check if the permissions have been denied permanently
-//        if (EasyPermissions.somePermissionPermanentlyDenied(
-//                host = this,
-//                deniedPerms = *arrayOf(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
-//            )
-//        ) SettingsDialog.Builder(this).build().show()
 
         if (EasyPermissions.hasPermissions(
                 this,
@@ -55,20 +49,20 @@ class MainActivity : AppCompatActivity() {
                 WRITE_EXTERNAL_STORAGE
             )
         ) {
-            // setup the fragment here
+            setupOpenButton()
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.mainNavHost, homeFragment)
                 commit()
             }
-            setupOpenButton()
-        } else {
-            EasyPermissions.requestPermissions(
-                host = this,
-                rationale = getString(R.string.permission_read_and_write_external_storage),
-                requestCode = REQUEST_CODE_READ_AND_WRITE_EXTERNAL_STORAGE,
-                perms = *arrayOf(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
-            )
         }
+
+        else EasyPermissions.requestPermissions(
+            host = this,
+            rationale = getString(R.string.permission_read_and_write_external_storage),
+            requestCode = REQUEST_CODE_READ_AND_WRITE_EXTERNAL_STORAGE,
+            perms = arrayOf(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
+        )
+
     }
 
     private fun setupOpenButton() {
@@ -97,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                 imageURI?.let {
                     Log.i("MAIN ACTIVITY", it.toString())
                     val frag = HomeFragment.newInstance(uri = it)
-                    supportFragmentManager?.beginTransaction().apply {
+                    supportFragmentManager.beginTransaction().apply {
                         replace(R.id.mainNavHost, frag)
                         commit()
                     }

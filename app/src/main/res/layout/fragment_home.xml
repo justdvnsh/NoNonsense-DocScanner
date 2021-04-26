@@ -7,23 +7,9 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            />
-
-        <TextView
+            android:id="@+id/image_view_iv"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:text="@string/tap_anywhere_to_open_a_photo"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:id="@+id/open_img_tv"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

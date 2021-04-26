@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature android:name="android.hardware.camera2.any" />
+
     <application
         android:name=".DocScanner"
         android:allowBackup="true"
@@ -14,6 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NoNonsense_DocScanner">
+        <activity android:name=".home.camera.CameraActivity"></activity>
         <activity android:name=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

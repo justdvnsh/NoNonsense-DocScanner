@@ -25,6 +25,8 @@ buildscript {
         gson="2.6.0"
         expTv="0.1.4"
         easyPermissions="0.1.0"
+        camerax_version = "1.0.0-rc01"
+        camera_view="1.0.0-alpha24"
     }
     repositories {
         google()
