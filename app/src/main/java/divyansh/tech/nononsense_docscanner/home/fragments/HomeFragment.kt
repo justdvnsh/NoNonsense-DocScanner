@@ -59,7 +59,10 @@ class HomeFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupFab()
+        if (imageUri != null) {
+            binding.fabCamera.visibility = View.GONE
+            binding.imageViewIv.setImageURI(imageUri?.toUri())
+        } else setupFab()
     }
 
     @AfterPermissionGranted(REQUEST_CODE_CAMERA_PERM)
