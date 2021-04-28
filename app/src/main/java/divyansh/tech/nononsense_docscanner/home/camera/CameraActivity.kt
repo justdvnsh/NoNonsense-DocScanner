@@ -15,7 +15,9 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import divyansh.tech.nononsense_docscanner.R
+import divyansh.tech.nononsense_docscanner.home.scan.ScannedItemActivity
 import divyansh.tech.nononsense_docscanner.utils.C.SELECT_IMAGE_CODE
+import divyansh.tech.nononsense_docscanner.utils.C.STRING_URI
 import kotlinx.android.synthetic.main.activity_camera.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -57,14 +59,13 @@ class CameraActivity : AppCompatActivity() {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         val savedUri = Uri.fromFile(photoFile)
                         val msg = "Photo captured: $savedUri"
-                        val intent = Intent().apply {
-                            putExtra("uri", savedUri)
-                        }
-                        setResult(
-                                Activity.RESULT_OK,
-                                intent
-                        )
+                        val intent =
+                            Intent(this@CameraActivity, ScannedItemActivity::class.java)
+                                .apply {
+                                    putExtra(STRING_URI, savedUri.toString())
+                                }
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                        startActivity(intent)
                         finish()
                     }
 

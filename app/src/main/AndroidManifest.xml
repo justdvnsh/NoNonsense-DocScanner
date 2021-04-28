@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoNonsense_DocScanner">
         <activity android:name=".home.camera.CameraActivity"></activity>
+        <activity android:name=".home.scan.ScannedItemActivity"></activity>
         <activity android:name=".home.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

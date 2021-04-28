@@ -4,4 +4,8 @@
     <string name="permission_camera">This app requires permissions to use the camera.</string>
     <string name="open">OPEN</string>
     <string name="tap_anywhere_to_open_a_photo">Tap Anywhere to Open a Photo</string>
+    <string name="scan_documents">Scan Documents</string>
+    <string name="pdf_tools">PDF Tools</string>
+    <string name="settings">Settings</string>
+    <string name="your_scans">Your Scans</string>
 </resources>
