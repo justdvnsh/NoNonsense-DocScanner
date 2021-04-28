@@ -1,5 +1,7 @@
 package divyansh.tech.nononsense_docscanner.home.camera
 
+import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +15,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import dagger.hilt.android.AndroidEntryPoint
 import divyansh.tech.nononsense_docscanner.R
+import divyansh.tech.nononsense_docscanner.utils.C.SELECT_IMAGE_CODE
 import kotlinx.android.synthetic.main.activity_camera.*
 import java.io.File
 import java.text.SimpleDateFormat
@@ -54,7 +57,15 @@ class CameraActivity : AppCompatActivity() {
                     override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                         val savedUri = Uri.fromFile(photoFile)
                         val msg = "Photo captured: $savedUri"
+                        val intent = Intent().apply {
+                            putExtra("uri", savedUri)
+                        }
+                        setResult(
+                                Activity.RESULT_OK,
+                                intent
+                        )
                         Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+                        finish()
                     }
 
                     override fun onError(exception: ImageCaptureException) {

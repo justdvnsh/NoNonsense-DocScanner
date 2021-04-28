@@ -5,4 +5,5 @@ object C {
     const val REQUEST_CODE_CAMERA_PERM = 102
     const val STRING_URI ="string_uri"
     const val SELECT_IMAGE_CODE = 1001
+    const val IMAGE_CAPTURE_CODE = 1003
 }

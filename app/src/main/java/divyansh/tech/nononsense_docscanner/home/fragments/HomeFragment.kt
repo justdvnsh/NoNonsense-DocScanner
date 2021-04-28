@@ -1,9 +1,11 @@
 package divyansh.tech.nononsense_docscanner.home.fragments
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +23,9 @@ import divyansh.tech.nononsense_docscanner.R
 import divyansh.tech.nononsense_docscanner.databinding.FragmentHomeBinding
 import divyansh.tech.nononsense_docscanner.home.camera.CameraActivity
 import divyansh.tech.nononsense_docscanner.utils.C
+import divyansh.tech.nononsense_docscanner.utils.C.IMAGE_CAPTURE_CODE
 import divyansh.tech.nononsense_docscanner.utils.C.REQUEST_CODE_CAMERA_PERM
+import divyansh.tech.nononsense_docscanner.utils.C.SELECT_IMAGE_CODE
 import divyansh.tech.nononsense_docscanner.utils.C.STRING_URI
 import divyansh.tech.nononsense_docscanner.utils.FileUtils.openFileChooser
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -73,7 +77,10 @@ class HomeFragment: Fragment() {
                     requireContext(),
                     perms = arrayOf(Manifest.permission.CAMERA)
                 )
-            ) startActivity(Intent(requireContext(), CameraActivity::class.java))
+            ) requireActivity().startActivityIfNeeded(
+                    Intent(requireContext(), CameraActivity::class.java),
+                    IMAGE_CAPTURE_CODE
+            )
 
             else EasyPermissions.requestPermissions(
                 host = this,
@@ -83,5 +90,4 @@ class HomeFragment: Fragment() {
             )
         }
     }
-
 }
