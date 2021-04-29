@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,8 +23,10 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class ScanFragment: Fragment() {
+
     private lateinit var binding: FragmentScanBinding
     @Inject lateinit var controller: ScanItemsController
+    private val viewModel: ScanViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +45,11 @@ class ScanFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupFab()
         setupRecyclerView()
+        setupObservers()
+        viewModel.getAllScannedDocuments(
+            externalMediaDir = requireActivity().externalMediaDirs,
+            filename = getString(R.string.app_name)
+        )
     }
 
     /*
@@ -72,5 +81,12 @@ class ScanFragment: Fragment() {
     * */
     private fun setupRecyclerView() {
         binding.imageViewRv.adapter = controller.adapter
+    }
+
+    /*Helper method to setup the observer*/
+    private fun setupObservers() {
+        viewModel.uris.observe(viewLifecycleOwner, Observer {
+            controller.setData(it)
+        })
     }
 }

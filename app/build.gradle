@@ -59,11 +59,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
 
-    // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_viewModels"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_viewModels"
-    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_viewModels"
-
     // dagger hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
@@ -71,12 +66,6 @@ dependencies {
     // dagger for viewmodel
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$dagger_viewModels"
     kapt "androidx.hilt:hilt-compiler:$dagger_compiler"
-
-    // Coroutines
-    implementation(
-            "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines",
-            "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
-    )
 
     // easy permissions
     implementation "com.vmadalin:easypermissions-ktx:$easyPermissions"
@@ -92,4 +81,11 @@ dependencies {
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     // Add the annotation processor if you are using Epoxy's annotations (recommended)
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
+
+    // rxjava and rxandroid
+    implementation "io.reactivex.rxjava3:rxandroid:$rxAndroidVersion"
+    // Because RxAndroid releases are few and far between, it is recommended you also
+    // explicitly depend on RxJava's latest version for bug fixes and new features.
+    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
+    implementation "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
 }
