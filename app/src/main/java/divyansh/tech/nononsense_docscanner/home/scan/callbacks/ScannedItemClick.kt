@@ -4,5 +4,5 @@ import android.net.Uri
 
 interface ScannedItemClick {
 
-    fun onClick(uri: Uri)
+    fun onClick(filePath: String)
 }

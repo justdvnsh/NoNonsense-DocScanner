@@ -18,9 +18,9 @@ class ScanItemRepo @Inject constructor() {
     * @param filename: String -> Get the dir where the scanned docs are saved
     * @returns an Observable list of uris
     * */
-    fun getScannedDocs(externalMediaDirs: Array<File>, fileName: String): Observable<List<Uri>> {
+    fun getScannedDocs(externalMediaDirs: Array<File>, fileName: String): Observable<List<String>> {
         Log.i("REPO", "Inside getScanned repo")
-        val list = mutableListOf<Uri>()
+        val list = mutableListOf<String>()
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
             File(it, fileName).apply { mkdirs() }
         }
@@ -29,7 +29,7 @@ class ScanItemRepo @Inject constructor() {
             Log.i("REPO", "YES it does exists")
             for (file in mediaDir.listFiles()) {
                 Log.i("REPO", file.absolutePath)
-                list.add(file.absolutePath.toUri())
+                list.add(file.absolutePath)
             }
         }
         return Observable.fromArray(list.toList())

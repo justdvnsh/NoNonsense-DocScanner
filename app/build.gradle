@@ -45,6 +45,7 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appcompat"
     implementation "com.google.android.material:material:$material"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout"
+    implementation project(path: ':opencv')
 
     // test dependencies
     testImplementation "junit:junit:$junit"

@@ -101,9 +101,9 @@ class ScanFragment: Fragment(), ScannedItemClick {
     }
 
     // When a scanned Item is clicked
-    override fun onClick(uri: Uri) {
+    override fun onClick(filePath: String) {
         val intent = Intent(requireContext(), ScannedItemActivity::class.java).apply {
-            putExtra(STRING_URI, uri.toString())
+            putExtra(STRING_URI, filePath)
         }
         startActivity(intent)
     }

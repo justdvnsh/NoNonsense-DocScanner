@@ -21,8 +21,8 @@ class ScanViewModel @Inject constructor(
 
     //TODO: Add RxJava to fetch files in a directory. Background task.
     private val disposable: CompositeDisposable = CompositeDisposable()
-    private val _uris: MutableLiveData<List<Uri>> = MutableLiveData()
-    val uris: LiveData<List<Uri>> = _uris
+    private val _uris: MutableLiveData<List<String>> = MutableLiveData()
+    val uris: LiveData<List<String>> = _uris
 
     /*
     * Get all the scanned docs from dir
