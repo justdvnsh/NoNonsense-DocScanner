@@ -11,18 +11,21 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import dagger.hilt.android.AndroidEntryPoint
 import divyansh.tech.nononsense_docscanner.R
 import divyansh.tech.nononsense_docscanner.databinding.FragmentScanBinding
 import divyansh.tech.nononsense_docscanner.home.camera.CameraActivity
+import divyansh.tech.nononsense_docscanner.home.scan.callbacks.ScannedItemClick
 import divyansh.tech.nononsense_docscanner.home.scan.epoxy.ScanItemsController
 import divyansh.tech.nononsense_docscanner.utils.C
+import divyansh.tech.nononsense_docscanner.utils.C.STRING_URI
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ScanFragment: Fragment() {
+class ScanFragment: Fragment(), ScannedItemClick {
 
     private lateinit var binding: FragmentScanBinding
     @Inject lateinit var controller: ScanItemsController
@@ -46,9 +49,13 @@ class ScanFragment: Fragment() {
         setupFab()
         setupRecyclerView()
         setupObservers()
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.getAllScannedDocuments(
-            externalMediaDir = requireActivity().externalMediaDirs,
-            filename = getString(R.string.app_name)
+                externalMediaDir = requireActivity().externalMediaDirs,
+                filename = getString(R.string.app_name)
         )
     }
 
@@ -80,13 +87,24 @@ class ScanFragment: Fragment() {
     * Helper method to setup the Recycler View
     * */
     private fun setupRecyclerView() {
-        binding.imageViewRv.adapter = controller.adapter
+        binding.imageViewRv.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            adapter = controller.adapter
+        }
     }
 
     /*Helper method to setup the observer*/
     private fun setupObservers() {
         viewModel.uris.observe(viewLifecycleOwner, Observer {
-            controller.setData(it)
+            if (it.isNotEmpty()) controller.setData(it)
         })
+    }
+
+    // When a scanned Item is clicked
+    override fun onClick(uri: Uri) {
+        val intent = Intent(requireContext(), ScannedItemActivity::class.java).apply {
+            putExtra(STRING_URI, uri.toString())
+        }
+        startActivity(intent)
     }
 }

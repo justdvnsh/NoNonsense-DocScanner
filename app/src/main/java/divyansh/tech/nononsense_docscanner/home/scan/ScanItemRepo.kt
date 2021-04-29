@@ -1,6 +1,7 @@
 package divyansh.tech.nononsense_docscanner.home.scan
 
 import android.net.Uri
+import android.util.Log
 import androidx.core.net.toUri
 import io.reactivex.rxjava3.core.Observable
 import java.io.File
@@ -18,12 +19,16 @@ class ScanItemRepo @Inject constructor() {
     * @returns an Observable list of uris
     * */
     fun getScannedDocs(externalMediaDirs: Array<File>, fileName: String): Observable<List<Uri>> {
+        Log.i("REPO", "Inside getScanned repo")
         val list = mutableListOf<Uri>()
         val mediaDir = externalMediaDirs.firstOrNull()?.let {
             File(it, fileName).apply { mkdirs() }
         }
+        Log.i("REPO", mediaDir.toString())
         if (mediaDir != null && mediaDir.exists()) {
+            Log.i("REPO", "YES it does exists")
             for (file in mediaDir.listFiles()) {
+                Log.i("REPO", file.absolutePath)
                 list.add(file.absolutePath.toUri())
             }
         }
